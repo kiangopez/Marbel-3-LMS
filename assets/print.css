@@ -1,0 +1,92 @@
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#nav-header {
+  display: none;
+  visibility: none;
+}
+#nav-sidebar {
+  display: none;
+  visibility: none;
+}
+
+.heading {
+  display: none;
+  visibility: none;
+}
+
+#back-btn {
+  display: none;
+  visibility: none;
+}
+
+#print-btn {
+  /* display: none;
+  visibility: none; */
+  color: #fff;
+}
+
+@media print {
+  #print-btn {
+    display: none;
+  }
+  #close-btn {
+    display: none;
+  }
+}
+
+#footer {
+  display: none;
+  visibility: none;
+}
+
+.dashboard {
+  margin: 0;
+  padding: 0;
+}
+
+.student-info {
+  margin-bottom: 20px;
+}
+
+.class-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.class-card table tr td {
+  margin-bottom: 1px solid black;
+}
+
+.class-card table th {
+  background-color: #bac1e7;
+  padding: 20px 0;
+}
+
+.gwa p {
+  text-align: right;
+}
+
+.signatures {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 50px;
+  margin-top: 50px;
+}
+
+.teacher {
+  width: 150px;
+  text-align: center;
+}
+
+.prints {
+  margin: 20px;
+}
