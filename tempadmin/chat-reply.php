@@ -34,7 +34,7 @@
                     $receiver_name = $row['receiver_name'];
                     $sender_name = $row['sender_name'];
         ?>
-                        <div class="chat-header">
+                        <div class="chat-header c-header-items c-header-reply">
                             <p>Replying to: <?php echo $sender_name; ?> </p>
                             <div>
                                 <a class="secondary-btn" href="<?php echo SITEURL;?>tempadmin/chat.php?id=<?php echo $id; ?>">Back</a>

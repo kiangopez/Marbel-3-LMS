@@ -31,7 +31,7 @@
 
         $action_details = $user_name." started an attempt on a quiz in ".$subject_name." (".$subject_code.").";
 
-        $sql_user_log = "INSERT INTO user_log (username, activity_date, action, action_details, role) VALUES ('$user_name' , '$date_today', 'Started an attempt on a quiz', '$action_details', '$role');";
+        $sql_user_log = "INSERT INTO user_log (username, activity_date, action, action_details, role, user_usn) VALUES ('$user_name' , '$date_today', 'Started an attempt on a quiz', '$action_details', '$role', '$id');";
         $res_user_log = mysqli_query($conn, $sql_user_log);
 
         $sql5 = "SELECT * FROM quiz_student WHERE student_id = $id AND quiz_id = $quiz_id";
@@ -153,9 +153,21 @@
             <p></p>
         </div>
         <div class="submit-attempt text-right">
-            <button class="primary-btn" name="submit" type="submit" id="submit-quiz">Submit Quiz</button>
+            <button class="primary-btn quiz-submit-cta" id="submit-cta" type="button">Submit Quiz</button>
+        </div>
+        <div class="confirmation" id="confirmation">
+            <div class="confirmation-wrapper">
+                <div class="text">
+                    <p>Are you sure you want to submit this attempt?</p>
+                </div>
+                <div class="btn-cta">
+                    <button class="secondary-btn" type="button" id="cancel-sub">Cancel</button>
+                    <button class="primary-btn" name="submit" type="submit" id="submit-quiz">Submit Attempt</button>
+                </div>
+            </div>
         </div>
     </form>
+
     <?php
         } else {
             ?>

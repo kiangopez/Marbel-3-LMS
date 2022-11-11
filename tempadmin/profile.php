@@ -1,5 +1,7 @@
 <?php include"partials-tempadmin/header.php"; ?>
     <?php
+    if($_SESSION['role'] == "admin") {
+    
         if($_GET['id'] == $_SESSION['adminId']) {
             $id = $_GET['id'];
             $sql = "SELECT * FROM admin_tbl WHERE id = $id";
@@ -69,6 +71,17 @@
             </section>
             <?php
         }
+    } else {
+        ?>
+        <section class="dashboard wrapper column" id="dashboard">
+            <div class="error-handler">
+                <p>You're not allowed in this page</p> 
+                <a class="blue" href="<?php echo SITEURL?>index.php">Return to Home</a>
+                <p class="break">Error: Admin account don't match</p>
+            </div>
+        </section>
+    <?php
+      }
         ?>
 </section>
 <?php include"partials-tempadmin/footer.php"; ?>

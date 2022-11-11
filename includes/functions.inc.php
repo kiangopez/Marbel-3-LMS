@@ -284,7 +284,7 @@ function loginAdmin($conn, $uid, $pwd) {
             session_start();
             $_SESSION["adminId"] = $adminUidExists["id"];
             $_SESSION["adminUid"] = $adminUidExists["username"];
-        
+            $_SESSION["role"] = "superadmin";
             $sql_ad = "SELECT * FROM admin_tbl WHERE id = ".$adminUidExists["id"];
             $res_ad = mysqli_query($conn, $sql_ad);
             $row_ad = mysqli_fetch_assoc($res_ad);
@@ -307,6 +307,7 @@ function loginAdmin($conn, $uid, $pwd) {
             session_start();
             $_SESSION["adminId"] = $adminUidExists["id"];
             $_SESSION["adminUid"] = $adminUidExists["username"];
+            $_SESSION["role"] = "admin";
         
             $sql_ad = "SELECT * FROM admin_tbl WHERE id = ".$adminUidExists["id"];
             $res_ad = mysqli_query($conn, $sql_ad);

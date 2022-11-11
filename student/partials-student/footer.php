@@ -10,5 +10,6 @@
     <script type="text/javascript" src="../assets/script.js"></script>
     <script type="text/javascript" src="../assets/studentcalendar.js"></script>
     <script type="text/javascript" src="../assets/timer.ajax.js"></script>
+    <script type="text/javascript" src="../assets/submit-confirmation.js"></script>
 </body>
 </html>

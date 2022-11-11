@@ -11,7 +11,7 @@
     <div class="heading mb-10"><h2>Messages</h2></div>
     <div class="chat-wrapper">
         <div class="chat-left">
-            <div class="chat-header">
+            <div class="chat-header c-header-items c-header-reply">
                 <p>Inbox</p>
                 <div>
                     <a class="secondary-btn" href="<?php echo SITEURL;?>teacher/chat.php?id=<?php echo $id; ?>">Back</a>

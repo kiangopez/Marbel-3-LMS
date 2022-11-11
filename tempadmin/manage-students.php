@@ -1,5 +1,7 @@
 <?php include "partials-tempadmin/header.php"; ?>
-
+<?php
+    if($_SESSION['role'] == "admin") {
+?>
     <section class="dashboard wrapper column" id="dashboard">
         <div class="heading p-20"><h2>Manage Students</h2></div>
         <br>
@@ -115,4 +117,18 @@
         ?>
         </div>
     </section>
+
+    <?php 
+    } else {
+      ?>
+      <section class="dashboard wrapper column" id="dashboard">
+          <div class="error-handler">
+              <p>You're not allowed in this page</p> 
+              <a class="blue" href="<?php echo SITEURL?>index.php">Return to Home</a>
+              <p class="break">Error: Admin account don't match</p>
+          </div>
+      </section>
+  <?php
+    }
+?>
 <?php include "partials-tempadmin/footer.php"; ?>

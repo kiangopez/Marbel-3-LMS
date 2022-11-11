@@ -1,5 +1,7 @@
 <?php include"partials-tempadmin/header.php"; ?>
 <?php
+    if($_SESSION['role'] == "admin") {
+
     if($_GET['id'] == $_SESSION['adminId']) {
         $id = $_GET['id'];
         $sql2 = "SELECT * FROM admin_tbl WHERE id = $id;";
@@ -14,7 +16,7 @@
         <form action="../includes/read-message-tempadmin.inc.php" method="POST">
             <div class="chat-header">
                 <p>Inbox</p>
-                <div class="flex gap-20">
+                <div class="flex gap-20 c-header-items">
                     <button class="primary-btn" name="read">Read</button>
                     <input type="checkbox" name="selectall" id="checkAll"> <label for="checkall">Check all</label>
                         <script>
@@ -40,8 +42,10 @@
                             <div class="chat-message">
                                 <div class="message-content">
                                     <?php echo $content; ?>
-                                    <input type="checkbox" name="selector[]" value="<?php echo $message_id; ?>" >
                                     <input type="hidden" name="user_id" value="<?php echo $id; ?>" >
+                                </div>
+                                <div class="msg-checkbox">
+                                    <input type="checkbox" name="selector[]" value="<?php echo $message_id; ?>" >
                                 </div>
                                 <div class="message-footer">
                                     <div class="sender">
@@ -113,7 +117,20 @@
             </section>
             <?php
         }
-        ?>
+
+    } else {
+      ?>
+      <section class="dashboard wrapper column" id="dashboard">
+          <div class="error-handler">
+              <p>You're not allowed in this page</p> 
+              <a class="blue" href="<?php echo SITEURL?>index.php">Return to Home</a>
+              <p class="break">Error: Admin account don't match</p>
+          </div>
+      </section>
+  <?php
+    }
+?>
+        
 </section>
 
 <?php include "partials-tempadmin/footer.php"; ?>

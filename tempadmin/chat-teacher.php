@@ -15,7 +15,7 @@
         <form action="../includes/read-message-tempadmin.inc.php" method="POST">
             <div class="chat-header">
                 <p>Inbox</p>
-                <div class="flex gap-20">
+                <div class="flex gap-20 c-header-items">
                     <button class="primary-btn" name="read">Read</button>
                     <input type="checkbox" name="selectall" id="checkAll"> <label for="checkall">Check all</label>
                         <script>
@@ -41,8 +41,10 @@
                             <div class="chat-message">
                                 <div class="message-content">
                                     <?php echo $content; ?>
-                                    <input type="checkbox" name="selector[]" value="<?php echo $message_id; ?>" >
                                     <input type="hidden" name="user_id" value="<?php echo $id; ?>" >
+                                </div>
+                                <div class="msg-checkbox">
+                                    <input type="checkbox" name="selector[]" value="<?php echo $message_id; ?>" >
                                 </div>
                                 <div class="message-footer">
                                     <div class="sender">

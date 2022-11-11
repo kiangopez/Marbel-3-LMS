@@ -44,6 +44,10 @@
                     <table>
                         <div class="edit-subm-header">
                             <h4><?php echo $title; ?></h4>
+                            asdfasdfasdf
+                        </div>
+                        <div class="file-types">
+                            <p>Accepted File Types: pdf, doc, docx</p>
                         </div>
                     </table>
                     <div class="up-files">
@@ -77,7 +81,9 @@
                         <div class="edit-subm-header">
                             <h4><?php echo $title; ?></h4>
                         </div>
-                        
+                        <div class="file-types">
+                            <p>Accepted File Types: pdf, doc, docx</p>
+                        </div>
                     </table>
 
                     <form action="<?php echo SITEURL; ?>includes/student-submission.inc.php" method="POST" enctype="multipart/form-data">
