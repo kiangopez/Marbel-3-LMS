@@ -43,15 +43,53 @@
             $sql6 = "INSERT INTO quiz_student (quiz_id, student_id, quiz_time, status) VALUES ($quiz_id, $id, $time_limit_in_seconds, 'attempted')";
             $res6 = mysqli_query($conn, $sql6);
         }
-  ?>
-    <script type="text/javascript">
 
-        $(document).ready(function(){
+  ?>
+  <script type="text/javascript">
+    $(document).ready(() => {
+        var timer = 1;
+        $("#attempt-box").hide();
+        $("#submit-msg").hide();
         setInterval(() => {
-            $("#timer").load("response.php");
-        }, 1000);
-        });
+            var timer = jQuery("#timer").text();
+            $("#timer").load(`timer.ajax.php?quiz_id=${<?php echo $quiz_id; ?>}`);
+            if(timer == 0){
+                $("#attempt-box").hide();
+                $("#timer").hide();
+                $("#submit-msg").show();
+                $("#submit-msg p").text("Time is up please submit the quiz");
+            } else {
+                $("#attempt-box").show();
+                $("#timer").show();
+                $("#submit-msg").hide();
+            }
+        }, 1000);	
+
+    });
+
     </script>
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+    setInterval(() => {
+        let timer = jQuery("#timer").text();
+        $("#timer").load(`timer.ajax.php?quiz_id=${<?php echo $quiz_id; ?>}`);
+        console.log(timer)
+        if(timer == 0){
+            $("#attempt-box").hide();
+            $("#timer").hide();
+            $("#submit-msg").show();
+            $("#submit-msg p").text("Time is up please submit the quiz");
+        }
+    }, 1000);
+    });
+</script> -->
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+    setInterval(() => {
+        $("#timer").load("response.php");
+    }, 1000);
+    });
+</script> -->
   
   <div class="dashboard wrapper column" id="dashboard">
     <div class="subject-heading">
@@ -150,7 +188,7 @@
 
         </div> <!--attempt-wrapper end-->
         <div class="submit-msg" id="submit-msg">
-            <p></p>
+            <p>Time is up. Please submit the attempt.</p>
         </div>
         <div class="submit-attempt text-right">
             <button class="primary-btn quiz-submit-cta" id="submit-cta" type="button">Submit Quiz</button>
@@ -193,6 +231,20 @@
 </div> <!--dashboard wrapper end-->
 
 <script>
+    const submitId = document.getElementById("submit-cta");
+    const conf = document.getElementById("confirmation");
+    const cancel = document.getElementById("cancel-sub");
+
+    submitId.addEventListener("click", () => {
+    conf.classList.add("conf-active");
+
+    cancel.addEventListener("click", () => {
+        conf.classList.remove("conf-active");
+    });
+    });
+
+
+
     var formSubmitting = false;
     var setFormSubmitting = function() { formSubmitting = true; };
 

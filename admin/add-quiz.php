@@ -22,7 +22,7 @@
                 <label for="">Quiz Description</label>
                 <input type="text" name="description" required>
                 <label for="">Time Limit (in minutes)</label><br>
-                <input type="number" name="limit" min="5" max="120" required>
+                <input type="number" name="limit" min="5" max="120" required> <!-- limit minutes here (add min="5") -->
                 <br>
                 <label for="quarter">Select Period</label><br>
                 <select name="quarter" id="quarter" required>

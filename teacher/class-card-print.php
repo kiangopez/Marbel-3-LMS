@@ -149,6 +149,8 @@
                     $sql2 = "SELECT * FROM students_tbl AS s
                         INNER JOIN categories_tbl AS c
                             ON s.category_id = c.category_id
+                        INNER JOIN section_tbl AS st
+                            ON st.section_id = s.section_id
                         WHERE student_id = $student_id;        
                     ";
                     $res2 = mysqli_query($conn, $sql2);
@@ -159,6 +161,7 @@
                     $lname = $row2['lname'];
                     $USN = $row2['USN'];
                     $category_name = $row2['category_name'];
+                    $section_name = $row2['section_name'];
                     $full_name = $fname." ".$mname." ".$lname;
 
                     $GLOBALS['gwa'] = 0;
@@ -166,16 +169,24 @@
                     if($count > 0) {
                         
                     
-        ?>
+                        ?>
     <section class="dashboard wrapper column" id="dashboard">
         <div class="heading p-20"><h2>Student Report Card</h2></div>
-
-        <br>
-
+        <div class="prints">
+            <button onclick="window.print();" class="primary-btn" id="print-btn">Print</button>
+            <button id="close-btn" type="button" class="danger-btn" onclick="window.open('', '_self', ''); window.close();">Close</button>
+        </div>
         <div class="student-info p-20">
             <p>Name: <?php echo $full_name; ?></p>
             <p>USN: <?php echo $USN; ?></p>
-            <p>Grade Level: <?php echo $category_name; ?></p>
+            <p>Grade & Section: <?php echo $category_name." ".$section_name ; ?></p>
+            <p>Date: <?php echo date('M d Y'); ?></p>
+            <?php
+                $sqlsy = "SELECT * FROM term WHERE status = 'active';";
+                $ressy = mysqli_query($conn, $sqlsy);
+                $rowsy = mysqli_fetch_assoc($ressy);
+            ?>
+            <p>SY: <?php echo $rowsy['session']; ?></p>
         </div>
         <!-- Create a new grading table with q1,q2,q3,q4  -->
         <!-- Compute the grades above, input the grades in sql and display it in a while loop -->
@@ -192,7 +203,7 @@
         <div class="student-info class-card table p-20">
             <table class="tbl-50">
                 <tr>
-                    <th>Subjects</th>
+                    <th>Learning Areas</th>
                     <th>Q1</th>
                     <th>Q2</th>
                     <th>Q3</th>
@@ -470,16 +481,36 @@
                 ?>
             </table>
             <div class="gwa">
-                <p>GWA: <?php echo round($average,2); ?></p>
+                <p>General Average: <?php echo round($average,2); ?></p>
+            </div>
+            <div class="signatures">
+                <div class="teacher">
+                    <p>Dwayne Johnson</p>
+                    <hr>
+                    <p><b>Head Teacher</b></p>
+                </div>
+                <?php
+                    $sql_t = "SELECT *
+                    FROM students_tbl AS s
+                    INNER JOIN section_tbl AS st
+                        ON s.section_id =  st.section_id
+                    INNER JOIN teachers_tbl AS t
+                        ON st.teacher_id = t.teacher_id
+                    WHERE student_id = $student_id;
+                    ";
+                    $res_t = mysqli_query($conn, $sql_t);
+                    $row_t = mysqli_fetch_assoc($res_t);
+                ?>
+                <div class="teacher">
+                    <p><?php echo $row_t['fname']." ".$row_t['mname']." ".$row_t['lname']; ?></p>
+                    <hr>
+                    <p><b>Adviser</b></p>
+                </div>
             </div>
             <div class="enroll-btn " id="back-btn">
                 <a href="<?php echo SITEURL;?>teacher/view-grades.php?id=<?php echo $student_id; ?>" class="secondary-btn">Back</a>
             </div>
         </div>
-            <div class="p-20 mb-20">
-                <button onclick="window.print();" class="primary-btn" id="print-btn">Print</button>
-                <button id="close-btn" type="button" class="danger-btn" onclick="window.open('', '_self', ''); window.close();">Close</button>
-            </div>
         <?php 
         } else {
             ?>

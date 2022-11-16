@@ -1427,3 +1427,10 @@ input[type="file"] {
   }
 }
 /* Media Queries */
+
+.submit-msg {
+  padding: 10px 20px;
+  background-color: #df4759;
+  color: white;
+  margin-top: 10px;
+}
