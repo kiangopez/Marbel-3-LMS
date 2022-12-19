@@ -570,6 +570,8 @@
             <input type="password" name="pwd" placeholder="Password" required/>
             <div class="form-btn">
               <button type="submit" name="submit">LOG IN</button>
+              <br>
+              <a href="<?php echo SITEURL;?>student/forgot-password.php">forgot your password?</a>
             </div>
           </form>
           <div class="form-links">

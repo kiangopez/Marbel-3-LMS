@@ -56,8 +56,8 @@
             if(timer == 0){
                 $("#attempt-box").hide();
                 $("#timer").hide();
-                $("#submit-msg").show();
-                $("#submit-msg p").text("Time is up please submit the quiz");
+                // $("#submit-msg").show();
+                // $("#submit-msg p").text("Time is up please submit the quiz");
             } else {
                 $("#attempt-box").show();
                 $("#timer").show();
@@ -187,9 +187,9 @@
 
 
         </div> <!--attempt-wrapper end-->
-        <div class="submit-msg" id="submit-msg">
+        <!-- <div class="submit-msg" id="submit-msg">
             <p>Time is up. Please submit the attempt.</p>
-        </div>
+        </div> -->
         <div class="submit-attempt text-right">
             <button class="primary-btn quiz-submit-cta" id="submit-cta" type="button">Submit Quiz</button>
         </div>

@@ -102,7 +102,7 @@ body {
 
 .form-wrapper {
   width: 500px;
-  height: 500px;
+  padding: 20px 0;
   border-radius: 30px;
   background: #fff;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -158,6 +158,13 @@ input:hover {
 form .form-btn {
   margin: 0 auto;
   margin-top: 10px;
+  text-align: center;
+}
+form .form-btn a {
+  text-decoration: none;
+}
+form .form-btn a:hover {
+  text-decoration: underline;
 }
 form .form-btn button {
   background-color: #1aa7ec;
@@ -166,6 +173,7 @@ form .form-btn button {
   color: #fff;
   padding: 10px 80px;
   transition: 0.2s ease-out;
+  /* font-family: Poppins; */
 }
 
 form .form-btn button:hover {
@@ -258,6 +266,117 @@ form .form-btn button:active {
   color: #df4759;
 }
 
+.error {
+  margin-top: 20px;
+}
+
+/* Forgot Password */
+
+.first-wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #efefef;
+}
+
+.first-wrapper h1 {
+  font-size: 2rem;
+}
+
+.first-notif {
+  height: 30px;
+  margin-bottom: 10px;
+  min-width: 250px;
+}
+
+.first-notif p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background-color: #df4759;
+  text-align: center;
+  color: #f3f3f3;
+  /* padding: 5px 0; */
+}
+
+#first_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: #fff;
+  position: relative;
+  border-radius: 30px;
+}
+
+.back {
+  position: absolute;
+  bottom: 10px;
+  left: 60px;
+  text-decoration: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+#first_form input {
+  min-width: 250px;
+  /* height: ; */
+}
+
+#first_form button {
+  background-color: #1aa7ec;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 10px 80px;
+  transition: 0.2s ease-out;
+  text-transform: uppercase;
+  min-width: 250px;
+  margin-top: 10px;
+}
+#first_form button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.second-wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #efefef;
+}
+
+.second-wrapper form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 30px;
+}
+
+.second-wrapper form .form-control button {
+  background-color: #1aa7ec;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 10px 30px;
+  transition: 0.2s ease-out;
+  text-transform: uppercase;
+  margin: 0 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Forgot Password */
+
 @media only screen and (max-width: 1700px) {
   .left-login {
     display: none;
@@ -297,5 +416,39 @@ form .form-btn button:active {
   }
   .form-links {
     height: 40px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .form-wrapper {
+    width: 300px;
+  }
+
+  .form-links {
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+  }
+
+  form .form-btn button {
+    padding: 10px 76px;
+  }
+
+  #first_form {
+    max-width: 300px;
+  }
+
+  .back {
+    left: 23px;
+  }
+
+  #first_form h1,
+  .second-wrapper h1 {
+    font-size: 1.4rem;
+  }
+
+  .second-wrapper form .form-control button {
+    padding: 10px 33px;
+    margin: 0;
   }
 }

@@ -66,8 +66,17 @@
             $res123 = mysqli_query($conn, $sql123);
             $row123 = mysqli_fetch_assoc($res123);
             $minipic = $row123['image_name'];
+
+            if($minipic == "") {
+              ?>
+                <img src="../assets/images/default_image.png" alt="">
+              <?php
+            } else {
+              ?>
+                <img src="../assets/user_images/<?php echo $minipic; ?>">
+              <?php
+            }
           ?>
-          <img src="../assets/user_images/<?php echo $minipic; ?>" alt="Profile Picture" >
         </div>
         <div class="header-items">
               <?php
