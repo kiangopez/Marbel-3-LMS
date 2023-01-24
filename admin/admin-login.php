@@ -552,7 +552,20 @@
           <div class="header">
             <h3>Welcome Admin!</h3>
             <p>Sign in using your assigned account</p>
-
+          </div>
+          <div class="error-msg">
+            <p>    
+              <?php
+                  if(isset($_SESSION['no-login-message'])) {
+                      echo $_SESSION['no-login-message'];
+                      unset($_SESSION['no-login-message']);
+                  }
+                  if(isset($_SESSION['loginError'])) {
+                      echo $_SESSION['loginError'];
+                      unset($_SESSION['loginError']);
+                  }
+                ?>
+            </p>
           </div>
           <form action="../includes/admin-login.inc.php" method="POST">
             <label for="">Your Username</label>
@@ -563,16 +576,6 @@
               <button type="submit" name="submit">LOG IN</button>
             </div>
           </form>
-          <?php
-                    if(isset($_SESSION['no-login-message'])) {
-                        echo $_SESSION['no-login-message'];
-                        unset($_SESSION['no-login-message']);
-                    }
-                    if(isset($_SESSION['loginError'])) {
-                        echo $_SESSION['loginError'];
-                        unset($_SESSION['loginError']);
-                    }
-                ?>
           <div class="form-links">
             <a href="<?php echo SITEURL;?>"
               ><svg

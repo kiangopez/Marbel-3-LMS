@@ -7,6 +7,8 @@ if(isset($_POST['submit'])) {
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
+    $np = strlen($new_password);
+
     $sql = "SELECT * FROM admin_tbl WHERE id = $id";
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($res);
@@ -16,6 +18,7 @@ if(isset($_POST['submit'])) {
 
     if($checkPwd === false) {
         header("location:".SITEURL."tempadmin/profile.php?error=wrongcurrentpassword&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Wrong current password</p>";
         exit();
     }
 
@@ -23,6 +26,17 @@ if(isset($_POST['submit'])) {
 
     if (pwdMatch($new_password, $confirm_password) !== false ) {
         header("location:".SITEURL."tempadmin/profile.php?error=passwordsdontmatch&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Passwords do not match</p>";
+        exit();
+    }
+
+    if($np < 6) {
+        header("location:".SITEURL."tempadmin/change-password.php?error=passwordmin&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Passwords should contain atleast 6 characters</p>";
+        exit();
+    } else if ($np > 16) {
+        header("location:".SITEURL."tempadmin/change-password.php?error=passwordmax&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Passwords should contain with a maximum of 16 characters</p>";
         exit();
     }
 

@@ -552,7 +552,20 @@
           <div class="header">
             <h3>Welcome Teacher!</h3>
             <p>Sign in using your assigned URN number</p>
-
+          </div>
+          <div class="error-msg">
+            <p>    
+              <?php
+                  if(isset($_SESSION['no-login-message'])) {
+                      echo $_SESSION['no-login-message'];
+                      unset($_SESSION['no-login-message']);
+                  }
+                  if(isset($_SESSION['loginError'])) {
+                      echo $_SESSION['loginError'];
+                      unset($_SESSION['loginError']);
+                  }
+                ?>
+            </p>
           </div>
           <form action="../includes/teacher-login.inc.php" method="POST">
             <label for="">Your URN</label>
@@ -565,16 +578,6 @@
               <a href="<?php echo SITEURL;?>teacher/forgot-password.php">forgot your password?</a>
             </div>
           </form>
-          <?php
-                    if(isset($_SESSION['no-login-message'])) {
-                        echo $_SESSION['no-login-message'];
-                        unset($_SESSION['no-login-message']);
-                    }
-                    if(isset($_SESSION['loginError'])) {
-                        echo $_SESSION['loginError'];
-                        unset($_SESSION['loginError']);
-                    }
-                ?>
           <div class="form-links">
             <a href="<?php echo SITEURL;?>"
               ><svg

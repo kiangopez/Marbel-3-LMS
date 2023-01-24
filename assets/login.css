@@ -256,9 +256,9 @@ form .form-btn button:active {
 .text-center {
   text-align: center;
   color: #df4759;
-  position: absolute;
-  top: 350px;
-  width: 100%;
+}
+.error-msg {
+  height: 20px;
 }
 
 .no-login-message {
@@ -266,9 +266,9 @@ form .form-btn button:active {
   color: #df4759;
 }
 
-.error {
+/* .error {
   margin-top: 20px;
-}
+} */
 
 /* Forgot Password */
 

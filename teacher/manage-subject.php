@@ -33,13 +33,13 @@
                             $subject_id = $row['subject_id'];
                             ?>
                                 <tr>
-                                    <td><?php echo $subject_name; ?></td>
+                                    <td><a class="blue" href="<?php echo SITEURL;?>teacher/my-students.php?subj_id=<?php echo $subject_id;?>&user_id=<?php echo $id; ?>"><?php echo $subject_name; ?></a></td>
                                     <td><?php echo $subject_code; ?></td>
                                     <td><?php echo $category_name; ?></td>
-                                    <td>
-                                        <a href="<?php echo SITEURL;?>teacher/submission.php?id=<?php echo $subject_id;?>" class="secondary-btn">File Submission</a>
+                                    <td class="mysub-actions">
+                                        <a href="<?php echo SITEURL;?>teacher/submission.php?id=<?php echo $subject_id;?>" class="secondary-btn">File Upload</a>
                                         <a href="<?php echo SITEURL;?>teacher/quiz.php?id=<?php echo $subject_id;?>" class="success-btn">Add Quiz</a>
-                                        <a href="<?php echo SITEURL;?>teacher/upload-file.php?subj_id=<?php echo $subject_id;?>&user_id=<?php echo $id; ?>" class="primary-btn">Upload File</a>
+                                        <a href="<?php echo SITEURL;?>teacher/upload-file.php?subj_id=<?php echo $subject_id;?>&user_id=<?php echo $id; ?>" class="primary-btn">Upload Files</a>
                                     </td>
                                 </tr>
                             <?php

@@ -552,17 +552,24 @@
           <div class="header">
             <h3>Welcome Student!</h3>
             <p>Sign in using your assigned USN number</p>
-            <?php
-                    if(isset($_SESSION['no-login-message'])) {
-                        echo $_SESSION['no-login-message'];
-                        unset($_SESSION['no-login-message']);
-                    }
-                    if(isset($_SESSION['loginError'])) {
-                        echo $_SESSION['loginError'];
-                        unset($_SESSION['loginError']);
-                    }
-                ?>
+            <div>
           </div>
+          <div class="error-msg">
+            <p>    
+              <?php
+                  if(isset($_SESSION['no-login-message'])) {
+                      echo $_SESSION['no-login-message'];
+                      unset($_SESSION['no-login-message']);
+                  }
+                  if(isset($_SESSION['loginError'])) {
+                      echo $_SESSION['loginError'];
+                      unset($_SESSION['loginError']);
+                  }
+                ?>
+            </p>
+          </div>
+
+          
           <form action="../includes/student-login.inc.php" method="POST">
             <label for="">Your USN</label>
             <input type="text" name="USN" placeholder="USN" required/>

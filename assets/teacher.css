@@ -23,6 +23,10 @@ ul {
   list-style-type: none;
 }
 
+.pwd-class {
+  height: 20px;
+}
+
 .flex {
   display: flex;
   align-items: center;
@@ -124,6 +128,7 @@ header {
   top: 0;
   position: sticky;
   border-bottom: 1px solid rgba(149, 157, 165, 0.6);
+  z-index: 99999;
 }
 
 .header-items {
@@ -1402,6 +1407,114 @@ input[type="file"] {
   margin-bottom: 20px;
 }
 /* Class Card Ends */
+
+/* Teacher Class Card Starts */
+.teacher-report-card {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 0 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.trc-header {
+  display: flex;
+  position: relative;
+}
+
+.trc-img img {
+  width: 150px;
+  position: absolute;
+  left: -150px;
+}
+
+.trc-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin-top: 20px;
+}
+
+.trc-table td {
+  border: 1px solid black;
+}
+
+.trc-table td:nth-child(1) {
+  width: 10%;
+}
+.trc-table td:nth-child(2) {
+  width: 20%;
+}
+.trc-table td:nth-child(3) {
+  width: 30%;
+}
+.trc-table td:nth-child(4) {
+  width: 10%;
+}
+.trc-table td:nth-child(5) {
+  width: 10%;
+}
+.trc-table td:nth-child(6) {
+  width: 10%;
+}
+.trc-table td:nth-child(7) {
+  width: 10%;
+}
+
+.trc-remarks {
+  display: flex;
+  padding: 20px;
+}
+
+.trc-remarks div {
+  margin: 25px 50px;
+}
+
+.upc {
+  text-transform: uppercase;
+}
+
+.top-border {
+  border-top: 1px solid black;
+}
+
+.grade-time {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 16px;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  table {
+    page-break-after: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  td {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-footer-group;
+  }
+}
+/* Teacher Class Card Ends */
+
 /* Media Queries */
 @media only screen and (min-width: 980px) {
   .card-holder {
@@ -1491,6 +1604,16 @@ input[type="file"] {
 
   .nav-active.sidebar {
     margin-left: 0;
+  }
+}
+
+/* Laptop size */
+@media only screen and (max-width: 1790px) {
+  .mysub-actions a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
   }
 }
 
@@ -1584,6 +1707,55 @@ input[type="file"] {
   .subjects table {
     width: 200%;
   }
+  .section {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .section table {
+    width: 200%;
+    overflow-x: auto;
+  }
+  .manage-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .manage-table-wrapper table {
+    width: 200%;
+    overflow-x: auto;
+  }
+  .student-search {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .student-search table {
+    width: 200%;
+    overflow-x: auto;
+  }
+
+  .search form {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .search form {
+    flex-direction: column;
+  }
+
+  .student-header .search {
+    width: 100%;
+  }
+
+  .student-header .search form {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .student-info table {
+    width: 100%;
+  }
+
   .quiz-table {
     width: 100%;
     overflow-x: auto;
@@ -1685,7 +1857,7 @@ input[type="file"] {
     padding: 0;
   }
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 478px) {
   .logo h1 {
     display: none;
   }

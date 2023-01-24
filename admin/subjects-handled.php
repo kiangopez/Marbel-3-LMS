@@ -38,16 +38,16 @@
                 <table class="tbl-50 student-info text-center p-20">
                     <tr>
                         <td>
-                            <p class="p-20">Name:</p>
+                            <p class="">Name:</p>
                         </td>
                         <td>
-                            <p class="p-20"><?php echo $full_name; ?></p>
+                            <p class=""><?php echo $full_name; ?></p>
                         </td>
                     </tr>
                     <tr>
                         <td>Email:</td>
                         <td>
-                            <p class="p-20"><?php echo $email; ?></p>
+                            <p class=""><?php echo $email; ?></p>
                         </td>
                     </tr>
                 </table>

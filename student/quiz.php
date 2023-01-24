@@ -43,7 +43,7 @@
                 <th>Quiz</th>
                 <th>Quiz Notes</th>
                 <th>Time Limit</th>
-                <th>Grade</th>
+                <th>Final Grade</th>
                 <th></th>
             </tr>
             <?php
@@ -97,6 +97,32 @@
             
         </table>
     </div>
+    <?php
+      if($status == "submitted") {
+        ?>
+        <div class="attempt-tbl">
+          <table class="tbl-full text-center ">
+            <tr>
+              <th>Attempt No.</th>
+              <th>Date attempted</th>
+              <th>Score</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>June 22, 2022</td>
+              <td>10 / 10</td>
+            </tr>
+          </table>
+        </div>
+        <?php
+      } else {
+        ?>
+        <div>
+          d pa nagpapasa lods
+        </div>
+        <?php
+      }
+    ?>
     </div>
     <?php
         } else {

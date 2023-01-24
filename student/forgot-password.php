@@ -68,6 +68,7 @@ if(isset($_POST['submit'])) {
 
             <div class="form-heading">
                <h1>Reset Password</h1>
+               <p class="text-center">Password should contain <br> atleast 6 and a max <br> of 16 characters.</p>
             </div>
 
             <div class="first-notif">

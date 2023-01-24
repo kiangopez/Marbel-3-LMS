@@ -11,6 +11,8 @@ if(isset($_POST['submit'])) {
     $new_password = mysqli_real_escape_string($conn, $_POST['new_password']);
     $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
 
+    $np = strlen($new_password);
+
     $sql = "SELECT * FROM students_tbl WHERE student_id = $id";
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($res);
@@ -29,20 +31,31 @@ if(isset($_POST['submit'])) {
         exit();
     }
 
-    $sql1 =  "UPDATE students_tbl SET password = ? WHERE student_id = $id;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql1)) {
-        header("location:".SITEURL."student/forgot-password.php?error=stmtfailed&id=$id");
+    if($np < 6) {
+        header("location:".SITEURL."student/forgot-password.php");
+        $_SESSION['forgot-message'] = "<p class='error'>Passwords should contain <br/> atleast 6 characters</p>";
         exit();
-    } 
+    } else if ($np > 16) {
+        header("location:".SITEURL."student/forgot-password.php");
+        $_SESSION['forgot-message'] = "<p class='error'>Passwords should contain <br/> with a maximum of 16 characters</p>";
+        exit();
+    } else {
+        $sql1 =  "UPDATE students_tbl SET password = ? WHERE student_id = $id;";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql1)) {
+            header("location:".SITEURL."student/forgot-password.php?error=stmtfailed&id=$id");
+            exit();
+        } 
+    
+        $hashedPwd1 = password_hash($confirm_password, PASSWORD_DEFAULT);
+    
+        mysqli_stmt_bind_param($stmt, "s", $hashedPwd1);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    
+        header("location:".SITEURL."student/student-login.php?success=passwordSuccess");
+        $_SESSION['updatePassword'] = "<div class='success'>Password Successfully Updated</div>";
+        exit();
+    }
 
-    $hashedPwd1 = password_hash($confirm_password, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "s", $hashedPwd1);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-
-    header("location:".SITEURL."student/student-login.php?success=passwordSuccess");
-    $_SESSION['updatePassword'] = "<div class='success'>Password Successfully Updated</div>";
-    exit();
 }

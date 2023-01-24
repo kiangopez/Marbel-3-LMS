@@ -12,6 +12,7 @@ if(isset($_POST['submit'])) {
         exit();
     }
 
+
     // userLog($conn, $uid);
     loginStudent($conn, $uid, $pwd);
 } else {

@@ -96,7 +96,6 @@
                     <th>Q3</th>
                     <th>Q4</th>
                     <th>Final</th>
-                    <th>Remarks</th>
                 </tr>
                 <?php
                     while($row3 = mysqli_fetch_assoc($res3)) {
@@ -357,7 +356,7 @@
                                         $gwa += $total;
                                         $average = $gwa / $count;
                                         ?>
-                                        <td class="text-center"><?php echo $remark; ?></td>
+                                        <!-- <td class="text-center"><?php echo $remark; ?></td> -->
                                         <?php
                                     }
                                 ?>   

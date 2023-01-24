@@ -5,7 +5,15 @@
     ?>
 <section class="dashboard wrapper column" id="dashboard">
     <div class="heading p-20"><h2>Change Password</h2></div>
-    
+    <p class="p-20">Password should contain atleast 6 and a max of 16 characters.</p>
+    <div class="p-20 pwd-class">
+        <?php
+            if(isset($_SESSION['pwd-error'])) {
+                echo $_SESSION['pwd-error'];
+                unset($_SESSION['pwd-error']);
+            }
+        ?>
+    </div>
     <div class="form-wrapper">
         <form action="../includes/update-password-student.inc.php" method="POST" class="pt-20">
 

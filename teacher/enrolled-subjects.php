@@ -63,7 +63,7 @@
                 </tr>
             </table>
         </div>
-        <div class="p-20">
+        <div class="p-20 student-info">
             <table class="text-center tbl-50">
                 <tr>
                     <th>Enrolled Subjects</th>

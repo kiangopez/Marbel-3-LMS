@@ -23,6 +23,10 @@ ul {
   list-style-type: none;
 }
 
+.pwd-class {
+  height: 20px;
+}
+
 .flex {
   display: flex;
   align-items: center;
@@ -34,6 +38,10 @@ ul {
 }
 
 .wrapper {
+  padding: 2rem;
+}
+
+.ann-wrapper-main {
   padding: 2rem;
 }
 
@@ -175,6 +183,12 @@ footer.nav-active {
 }
 .password {
   margin-top: 10px;
+}
+
+.close-btn-grades {
+  position: absolute;
+  left: 20px;
+  top: 20px;
 }
 /* Header Starts*/
 header {
@@ -1806,6 +1820,13 @@ input[type="file"] {
     justify-content: center;
   }
 }
+
+@media only screen and (max-width: 980px) {
+  .ann-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media only screen and (min-width: 768px) and (max-width: 980px) {
   .dashboard {
     margin-left: 0;
@@ -2137,6 +2158,37 @@ input[type="file"] {
   .tbl-wrapper table {
     width: 200%;
   }
+  .view-all-subj {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .view-all-subj table {
+    width: 200%;
+  }
+  .user-log {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .user-log table {
+    width: 200%;
+  }
+  .table-wrapper {
+    padding: 0;
+  }
+
+  .ann-wrapper-main {
+    padding: 0;
+  }
+
+  .trc-header {
+    margin-top: 30px;
+  }
+
+  .trc-img img {
+    width: 100px;
+    position: absolute;
+    left: -50px;
+  }
   .student-info {
     width: 100%;
   }
@@ -2229,6 +2281,113 @@ input[type="file"] {
   }
 }
 
+/* Teacher Class Card Starts */
+.teacher-report-card {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 0 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.trc-header {
+  display: flex;
+  position: relative;
+}
+
+.trc-img img {
+  width: 150px;
+  position: absolute;
+  left: -50px;
+}
+
+.trc-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin-top: 20px;
+}
+
+.trc-table td {
+  border: 1px solid black;
+}
+
+.trc-table td:nth-child(1) {
+  width: 10%;
+}
+.trc-table td:nth-child(2) {
+  width: 20%;
+}
+.trc-table td:nth-child(3) {
+  width: 30%;
+}
+.trc-table td:nth-child(4) {
+  width: 10%;
+}
+.trc-table td:nth-child(5) {
+  width: 10%;
+}
+.trc-table td:nth-child(6) {
+  width: 10%;
+}
+.trc-table td:nth-child(7) {
+  width: 10%;
+}
+
+.trc-remarks {
+  display: flex;
+  padding: 20px;
+}
+
+.trc-remarks div {
+  margin: 25px 50px;
+}
+
+.upc {
+  text-transform: uppercase;
+}
+
+.top-border {
+  border-top: 1px solid black;
+}
+
+.grade-time {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 16px;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  table {
+    page-break-after: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  td {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-footer-group;
+  }
+}
+/* Teacher Class Card Ends */
+
 @media only screen and (max-width: 560px) {
   .subject-page h2 {
     font-size: 1.5rem;
@@ -2268,7 +2427,7 @@ input[type="file"] {
     padding: 0;
   }
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 446px) {
   .logo h1 {
     display: none;
   }

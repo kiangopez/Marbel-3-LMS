@@ -11,6 +11,8 @@ if(isset($_POST['submit'])) {
     $new_password = mysqli_real_escape_string($conn, $_POST['new_password']);
     $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
 
+    $np = strlen($new_password);
+
     $sql = "SELECT * FROM teachers_tbl WHERE teacher_id = $id";
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($res);
@@ -26,6 +28,16 @@ if(isset($_POST['submit'])) {
     if (pwdMatch($new_password, $confirm_password) !== false ) {
         $_SESSION['forgot-message'] = "<p>Passwords do not match</p>";
         header("location:".SITEURL."teacher/forgot-password.php");
+        exit();
+    }
+
+    if($np < 6) {
+        header("location:".SITEURL."teacher/forgot-password.php");
+        $_SESSION['forgot-message'] = "<p class='error'>Passwords should contain <br/> atleast 6 characters</p>";
+        exit();
+    } else if ($np > 16) {
+        header("location:".SITEURL."teacher/forgot-password.php");
+        $_SESSION['forgot-message'] = "<p class='error'>Passwords should contain <br/> with a maximum of 16 characters</p>";
         exit();
     }
 

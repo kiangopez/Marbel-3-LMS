@@ -7,6 +7,8 @@ if(isset($_POST['submit'])) {
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
+    $np = strlen($new_password);
+
     $sql = "SELECT * FROM teachers_tbl WHERE teacher_id = $id";
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($res);
@@ -15,21 +17,33 @@ if(isset($_POST['submit'])) {
     $checkPwd = password_verify($current_password, $pwdHashed);
 
     if($checkPwd === false) {
-        header("location:".SITEURL."teacher/teacher-profile.php?error=wrongcurrentpassword&id=$id");
+        header("location:".SITEURL."teacher/change-password.php?error=wrongcurrentpassword&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Wrong current password</p>";
         exit();
     }
 
     require_once "functions.inc.php";
 
     if (pwdMatch($new_password, $confirm_password) !== false ) {
-        header("location:".SITEURL."teacher/teacher-profile.php?error=passwordsdontmatch&id=$id");
+        header("location:".SITEURL."teacher/change-password.php?error=passwordsdontmatch&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Passwords do not match</p>";
+        exit();
+    }
+
+    if($np < 6) {
+        header("location:".SITEURL."teacher/change-password.php?error=passwordmin&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Passwords should contain atleast 6 characters</p>";
+        exit();
+    } else if ($np > 16) {
+        header("location:".SITEURL."teacher/change-password.php?error=passwordmax&id=$id");
+        $_SESSION['pwd-error'] = "<p class='error'>Passwords should contain with a maximum of 16 characters</p>";
         exit();
     }
 
     $sql1 =  "UPDATE teachers_tbl SET password = ? WHERE teacher_id = $id;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql1)) {
-        header("location:".SITEURL."teacher/teacher-profile.php?error=stmtfailed&id=$id");
+        header("location:".SITEURL."teacher/change-password.php?error=stmtfailed&id=$id");
         exit();
     } 
 

@@ -2,7 +2,7 @@
 <?php
     if($_SESSION['role'] == "superadmin") {
 ?>
-    <section class="dashboard wrapper column" id="dashboard">
+    <section class="dashboard ann-wrapper-main column" id="dashboard">
         <div class="heading p-20"><h2>Announcements</h2></div>
         <br>
 
@@ -125,7 +125,7 @@
     <?php 
     } else {
       ?>
-      <section class="dashboard wrapper column" id="dashboard">
+      <section class="dashboard ann-wrapper-main column" id="dashboard">
           <div class="error-handler">
               <p>You're not allowed in this page</p> 
               <a class="blue" href="<?php echo SITEURL?>index.php">Return to Home</a>

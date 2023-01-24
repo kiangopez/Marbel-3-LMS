@@ -33,7 +33,7 @@
                     // Determine the sql LIMIT starting the number for the results on the displaying page
                     $pageresult = ($page - 1) * $results_per_page;
 
-                    $sql2 = "SELECT s.subject_name, s.subject_code, s.category_id, c.category_name 
+                    $sql2 = "SELECT s.subject_name, s.subject_code, s.category_id, c.category_name, s.subject_id
                     FROM subjects_tbl AS s 
                     INNER JOIN categories_tbl AS c 
                     ON s.category_id = c.category_id 
@@ -47,9 +47,10 @@
                             $subject_name = $row['subject_name'];
                             $subject_code = $row['subject_code'];
                             $category_name = $row['category_name'];
+                            $subject_id = $row['subject_id'];
                             ?>
                             <tr>
-                                <td><?php echo $subject_name; ?></td>
+                                <td><a class="blue" href="<?php echo SITEURL;?>admin/view-students.php?subj_id=<?php echo $subject_id ?>"><?php echo $subject_name; ?></a></td>
                                 <td><?php echo $subject_code; ?></td>
                                 <td><?php echo $category_name; ?></td>
                             </tr>
@@ -78,10 +79,10 @@
             }
         ?>
         </div>
-            <div class="enroll-btn">
-            <a href="<?php echo SITEURL;?>admin/manage-subjects.php" class="secondary-btn btn-20 mt-20">Back</a>
-        <div>
-        </div>
+    </div>
+        <div class="enroll-btn">
+        <a href="<?php echo SITEURL;?>admin/manage-subjects.php" class="secondary-btn btn-20 mt-20">Back</a>
+    <div>
 
 
         </div>

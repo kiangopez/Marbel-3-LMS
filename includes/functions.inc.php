@@ -267,7 +267,7 @@ function loginAdmin($conn, $uid, $pwd) {
 
     if($adminUidExists === false) {
         header("location:".SITEURL."admin/admin-login.php");
-        $_SESSION["loginError"] = "<div class='error text-center'>Wrong Username or Password</div>";
+        $_SESSION["loginError"] = "<div class='error text-center'>User doesn't exist</div>";
         
         exit();
     }
@@ -277,7 +277,7 @@ function loginAdmin($conn, $uid, $pwd) {
 
     if($checkPwd === false) {
         header("location:".SITEURL."admin/admin-login.php");
-        $_SESSION["loginError"] = "<div class='error text-center'>Wrong Username or Password</div>";
+        $_SESSION["loginError"] = "<div class='error text-center'>Incorrect Password Please Try Again</div>";
         exit();
     } else if ($checkPwd === true) {
         if($adminUidExists["role"] == "superadmin") {
@@ -369,7 +369,7 @@ function loginStudent($conn, $uid, $pwd) {
 
     if($usnExists === false) {
         header("location:".SITEURL."student/student-login.php?error=wronglogin");
-        $_SESSION["loginError"] = "<div class='error text-center'>Wrong Username or Password</div>";
+        $_SESSION["loginError"] = "<div class='error text-center'>User doesn't exist</div>";
         exit();
     }
 
@@ -378,7 +378,7 @@ function loginStudent($conn, $uid, $pwd) {
 
     if($checkPwd === false) {
         header("location:".SITEURL."student/student-login.php?error=loginerror");
-        $_SESSION["loginError"] = "<div class='error text-center'>Wrong Username or Password</div>";
+        $_SESSION["loginError"] = "<div class='error text-center'>Incorrect Password Please Try Again</div>";
         exit();
     } else if ($checkPwd === true) {
         session_start();
@@ -414,7 +414,7 @@ function loginTeacher($conn, $urn, $pwd) {
 
     if($urnExists === false) {
         header("location:".SITEURL."teacher/teacher-login.php");
-        $_SESSION["loginError"] = "<div class='error text-center'>Wrong Username or Password</div>";
+        $_SESSION["loginError"] = "<div class='error text-center'>User doesn't exist</div>";
         exit();
     }
 
@@ -423,7 +423,7 @@ function loginTeacher($conn, $urn, $pwd) {
 
     if($checkPwd === false) {
         header("location:".SITEURL."teacher/teacher-login.php");
-        $_SESSION["loginError"] = "<div class='error text-center'>Wrong Username or Password</div>";
+        $_SESSION["loginError"] = "<div class='error text-center'>Incorrect Password Please Try Again</div>";
         exit();
     } else if ($checkPwd === true) {
         session_start();
