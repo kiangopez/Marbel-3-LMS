@@ -2187,7 +2187,7 @@ input[type="file"] {
   .trc-img img {
     width: 100px;
     position: absolute;
-    left: -50px;
+    left: -250px;
   }
   .student-info {
     width: 100%;
@@ -2302,9 +2302,11 @@ input[type="file"] {
 .trc-img img {
   width: 150px;
   position: absolute;
-  left: -50px;
+  left: -150px;
 }
-
+.gwa {
+  width: 100%;
+}
 .trc-table {
   width: 100%;
   border-collapse: collapse;

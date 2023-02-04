@@ -148,6 +148,12 @@
         $subject_name = $_POST['subject_name'];
         $subject_id = $_POST['subject_id'];
 
+        // Get the section name
+        $sql_section = "SELECT * FROM section_tbl AS s INNER JOIN categories_tbl AS c ON s.category_id = c.category_id WHERE s.section_id = $student_cat";
+        $res_section = mysqli_query($conn, $sql_section);
+        $row_section = mysqli_fetch_assoc($res_section);
+        $grade_and_section = $row_section['category_name']. " ". $row_section['section_name'];
+
         // Get the current school year term
         $sql_term = "SELECT * FROM term WHERE status = 'active'";
         $res_term = mysqli_query($conn, $sql_term);
@@ -176,7 +182,7 @@
 
           <div class="trc-details">
             <p>S.Y. <?php echo $current_term; ?></p>
-            <p>Grade & Section: <?php echo $student_cat; ?></p>
+            <p>Grade & Section: <?php echo $grade_and_section; ?></p>
             <p>Subject: <b><?php echo $subject_name; ?></b></p>
           </div>
 
@@ -191,7 +197,10 @@
               <th>Q4</th>
             </tr>
               <?php
-                $sql_student = "SELECT * FROM students_tbl AS s INNER JOIN student_subject AS ss ON s.student_id = ss.student_id WHERE ss.subject_id = $subject_id ORDER BY lname ASC";
+                $sql_student = "SELECT * FROM students_tbl AS s 
+                INNER JOIN student_subject AS ss ON s.student_id = ss.student_id 
+                INNER JOIN section_tbl AS section ON section.section_id = s.section_id
+                  WHERE ss.subject_id = $subject_id AND s.section_id = $student_cat ORDER BY lname ASC";
                 $res_student = mysqli_query($conn, $sql_student);
                 $count_student = mysqli_num_rows($res_student);
                 $num = 1;

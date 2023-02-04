@@ -45,6 +45,10 @@ ul {
   margin-left: -270px;
 }
 
+.gwa {
+  width: 100%;
+}
+
 .column {
   display: flex;
   flex-direction: column;

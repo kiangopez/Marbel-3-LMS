@@ -51,6 +51,11 @@
               $res3 = mysqli_query($conn, $sql3);
               $count3 = mysqli_num_rows($res3);
               $row3 = mysqli_fetch_assoc($res3);
+
+              $sql_attempt2 = "SELECT * FROM attempt_tbl AS a WHERE student_id = $id AND quiz_id = $quiz_id";
+              $res_attempt2 = mysqli_query($conn, $sql_attempt2);
+              $count_attempt = mysqli_num_rows($res_attempt2);
+
               if(isset($row3['grade'])) {
                 if(isset($row3['status'])) {
                   $grade = $row3['grade'];
@@ -60,14 +65,19 @@
               } else {
                 $status = " ";
               }
-              if($status == "submitted") {
+              if($count_attempt >= 5) {
+                $sql_attempt3 = "SELECT grade FROM attempt_tbl AS a WHERE student_id = $id AND quiz_id = $quiz_id ORDER BY grade DESC";
+                $res_attempt3 = mysqli_query($conn, $sql_attempt3);
+                $row4 = mysqli_fetch_assoc($res_attempt3);
+                $final_grade = $row4['grade'];
+                
                 ?>
                 <tr>
                   <td><?php echo $quiz_title; ?></td>
                   <td><?php echo $quiz_description; ?></td>
                   <td><?php echo $time_limit;?> minutes</td>
-                  <td><?php echo $grade ."/". $items;?> <br></td>
-                  <td><p>You already took this quiz</p></td>
+                  <td><?php echo $final_grade ."/". $items;?> <br></td>
+                  <td><p>You have reached the max number of attempts</p></td>
                 </tr>
                 <?php
 
@@ -82,6 +92,16 @@
                 </tr>
                 <?php
 
+              } else if ($count_attempt > 6) {
+                ?>
+                <tr>
+                  <td><?php echo $quiz_title ?></td>
+                  <td><?php echo $quiz_description; ?></td>
+                  <td><?php echo $time_limit;?> minutes</td>
+                  <td>-</td>
+                <td><a class="blue" href="<?php echo SITEURL;?>student/attempt.php?id=<?php echo $quiz_id; ?>">Attempt Quiz</a></td>
+            </tr>
+            <?php
               } else {
                 ?>
                 <tr>
@@ -99,6 +119,10 @@
     </div>
     <?php
       if($status == "submitted") {
+        $sql_attempt = "SELECT * FROM attempt_tbl AS a WHERE student_id = $id AND quiz_id = $quiz_id";
+        $res_attempt = mysqli_query($conn, $sql_attempt);
+        // $count = mysqli_num_rows($res_attempt);
+        $att_number = 1;
         ?>
         <div class="attempt-tbl">
           <table class="tbl-full text-center ">
@@ -107,21 +131,23 @@
               <th>Date attempted</th>
               <th>Score</th>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>June 22, 2022</td>
-              <td>10 / 10</td>
-            </tr>
+              <?php
+                while($attempt_row = mysqli_fetch_assoc($res_attempt)) {
+                  $att_date = $attempt_row['date_attempted'];
+                  $attempt_grade = $attempt_row['grade']."/".$attempt_row['items'];
+                  ?>
+                  <tr>
+                    <td><?php echo $att_number++; ?></td>
+                    <td><?php echo $att_date; ?></td>
+                    <td><?php echo $attempt_grade; ?></td>
+                  </tr>
+                  <?php
+                }
+              ?>
           </table>
         </div>
         <?php
-      } else {
-        ?>
-        <div>
-          d pa nagpapasa lods
-        </div>
-        <?php
-      }
+      } 
     ?>
     </div>
     <?php

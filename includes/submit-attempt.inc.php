@@ -6,6 +6,7 @@ if(isset($_POST['submit'])) {
     $student_id = $_POST['student_id'];
     $subject_name = $_POST['subject_name'];
     $subject_code = $_POST['subject_code'];
+    $time_limit = $_POST['time_limit'];
     $x1 = $_POST['x'];
     $score = 0;
     // Checks the correct answers
@@ -26,7 +27,7 @@ if(isset($_POST['submit'])) {
     // items = '". "'
     // WHERE quiz_id = $quiz_id AND student_id = $student_id;
     // ";
-    mysqli_query($conn,"UPDATE quiz_student SET status = 'submitted' ,`grade` = '".$score."', items = '".($x-1)."' 
+    mysqli_query($conn,"UPDATE quiz_student SET quiz_time = $time_limit ,status = 'submitted' ,`grade` = '".$score."', items = '".($x-1)."' 
     WHERE quiz_id = '$quiz_id' and student_id = '$student_id'")or die(mysqli_error());
     
     unset($_SESSION['duration']);
@@ -41,11 +42,17 @@ if(isset($_POST['submit'])) {
     date_default_timezone_set('Asia/Manila');
     $date_today = date('d-m-y H:i:s');
     $role = "Student";
+    $quiz_date = date('D, M d, Y');
 
     $action_details = $user_name." submitted an attempt on a quiz in ".$subject_name." (".$subject_code.").";
 
     $sql_user_log = "INSERT INTO user_log (username, activity_date, action, action_details, role) VALUES ('$user_name' , '$date_today', 'Submitted an attempt on a quiz', '$action_details', '$role');";
     $res_user_log = mysqli_query($conn, $sql_user_log);
+
+    // INSERT TO ATTEMPT TABLE
+    $total_items = ($x-1);
+    $sql_attempt = "INSERT INTO attempt_tbl (quiz_id, student_id, date_attempted, grade, items) VALUES ($quiz_id, $student_id, '$quiz_date', $score, $total_items);";
+    $res_attempt = mysqli_query($conn, $sql_attempt);
     
     header("location:".SITEURL."student/quiz.php?id=$quiz_id");
 

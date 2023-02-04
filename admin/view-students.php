@@ -40,7 +40,7 @@
                                         $section_name = $row['section_name'];
                                         $category_name = $row['category_name'];
                                         ?> 
-                                            <option value="<?php echo $category_name." ".$section_name; ?>"><?php echo $category_name." ".$section_name; ?></option>   
+                                            <option value="<?php echo $section_id; ?>"><?php echo $category_name." ".$section_name; ?></option>  
                                         <?php
                                     }
                                 }

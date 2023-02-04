@@ -162,6 +162,7 @@
                     $USN = $row2['USN'];
                     $category_name = $row2['category_name'];
                     $section_name = $row2['section_name'];
+                    $student_cat = $row2['category_id'];
                     $full_name = $fname." ".$mname." ".$lname;
 
                     $GLOBALS['gwa'] = 0;
@@ -176,7 +177,7 @@
             <button onclick="window.print();" class="primary-btn" id="print-btn">Print</button>
             <button id="close-btn" type="button" class="danger-btn" onclick="window.open('', '_self', ''); window.close();">Close</button>
         </div>
-        <div class="student-info p-20">
+        <!-- <div class="student-info p-20">
             <p>Name: <?php echo $full_name; ?></p>
             <p>USN: <?php echo $USN; ?></p>
             <p>Grade & Section: <?php echo $category_name." ".$section_name ; ?></p>
@@ -187,7 +188,46 @@
                 $rowsy = mysqli_fetch_assoc($ressy);
             ?>
             <p>SY: <?php echo $rowsy['session']; ?></p>
-        </div>
+        </div> -->
+
+        <?php
+
+         // Get the section name
+         $sql_section = "SELECT * FROM section_tbl AS s INNER JOIN categories_tbl AS c ON s.category_id = c.category_id WHERE s.section_id = $student_cat";
+         $res_section = mysqli_query($conn, $sql_section);
+         $row_section = mysqli_fetch_assoc($res_section);
+         $grade_and_section = $row_section['category_name']. " ". $row_section['section_name'];
+ 
+         // Get the current school year term
+         $sql_term = "SELECT * FROM term WHERE status = 'active'";
+         $res_term = mysqli_query($conn, $sql_term);
+         $row_term = mysqli_fetch_assoc($res_term);
+         $current_term = $row_term['session'];
+ 
+         // Get the adviser name
+         $sql_teacher = "SELECT * FROM teachers_tbl WHERE teacher_id = $id";
+         $res_teacher = mysqli_query($conn, $sql_teacher);
+         $row_teacher = mysqli_fetch_assoc($res_teacher);
+         $adviser_name = $row_teacher['fname']." ".$row_teacher['mname']." ".$row_teacher['lname'];
+        ?>
+
+        <div class="teacher-report-card">
+          <div class="trc-header">
+            <div class="trc-img">
+              <img src="../assets/images/mlogo.png" alt="">
+            </div>
+            <div class="trc-text">
+              <p>Marbel 3 <br> Elementary School</p>
+              <p>Korondal City, <br> South Cotabato</p>
+              <h1>Subject Report Card</h1>
+            </div>
+          </div>
+
+          <div class="trc-details">
+            <p>S.Y. <?php echo $current_term; ?></p>
+            <p>Grade & Section: <?php echo $grade_and_section; ?></p>
+            <!-- <p>Subject: <b><?php echo $subject_name; ?></b></p> -->
+          </div>
         <!-- Create a new grading table with q1,q2,q3,q4  -->
         <!-- Compute the grades above, input the grades in sql and display it in a while loop -->
         <?php
@@ -200,7 +240,7 @@
             $res3 = mysqli_query($conn, $sql3); 
             $count = mysqli_num_rows($res3);
         ?>
-        <div class="student-info class-card table p-20">
+        <div class="teacher-report-card class-card table p-20">
             <table class="tbl-50">
                 <tr>
                     <th>Learning Areas</th>
@@ -483,7 +523,7 @@
             <div class="gwa">
                 <p>General Average: <?php echo round($average,2); ?></p>
             </div>
-            <div class="signatures">
+            <!-- <div class="signatures">
                 <div class="teacher">
                     <p>Dwayne Johnson</p>
                     <hr>
@@ -506,7 +546,19 @@
                     <hr>
                     <p><b>Adviser</b></p>
                 </div>
+            </div> -->
+
+        <div class="trc-remarks">
+            <div class="trc-head">
+              <p class="upc top-border"><b>Dr. Enrique Pimplepopper</b></p>
+              <p>Principal</p>
             </div>
+            <div class="trc-adviser">
+              <p class="upc top-border"><b><?php echo $adviser_name; ?></b></p>
+              <p>Class Adviser</p>
+            </div>
+          </div>
+        </div>
             <div class="enroll-btn " id="back-btn">
                 <a href="<?php echo SITEURL;?>teacher/view-grades.php?id=<?php echo $student_id; ?>" class="secondary-btn">Back</a>
             </div>
@@ -550,7 +602,24 @@
         }
         ?>
     </section>
+    <div class="grade-time"><?php echo $date = date('M d, Y, D H:i:s'); ?></div>
+    <script type="text/javascript">
+      window.onload = addPageNumbers;
 
+      function addPageNumbers() {
+        var totalPages = Math.ceil(document.body.scrollHeight / 1123);  //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi, 
+        for (var i = 1; i <= totalPages; i++) {
+          var pageNumberDiv = document.createElement("div");
+          var pageNumber = document.createTextNode("Page " + i + " of " + totalPages);
+          pageNumberDiv.style.position = "absolute";
+          pageNumberDiv.style.top = "calc((" + i + " * (297mm - 0.5px)) - 40px)"; //297mm A4 pageheight; 0,5px unknown needed necessary correction value; additional wanted 40px margin from bottom(own element height included)
+          pageNumberDiv.style.height = "16px";
+          pageNumberDiv.appendChild(pageNumber);
+          document.body.insertBefore(pageNumberDiv, document.getElementById("content"));
+          pageNumberDiv.style.left = "calc(100% - (" + pageNumberDiv.offsetWidth + "px + 20px))";
+        }
+      }
+      </script>
 
 <!-- Footer Starts -->
 <footer class="flex" id="footer">

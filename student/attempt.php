@@ -180,6 +180,7 @@
                     <input type="hidden" name="student_id" value="<?php echo $id; ?>">
                     <input type="hidden" name="subject_name" value="<?php echo $subject_name; ?>">
                     <input type="hidden" name="subject_code" value="<?php echo $subject_code; ?>">
+                    <input type="hidden" name="time_limit" value="<?php echo $time_limit_in_seconds; ?>">
                 <?php
                 }
             ?>
