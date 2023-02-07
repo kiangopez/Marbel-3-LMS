@@ -27,6 +27,20 @@ if(isset($_POST['submit'])) {
     // items = '". "'
     // WHERE quiz_id = $quiz_id AND student_id = $student_id;
     // ";
+
+    // Check if the current attempt is higher than the old attempt or 0
+    $sql_check = "SELECT * FROM quiz_student WHERE quiz_id = $quiz_id";
+    $res_check = mysqli_query($conn, $sql_check);
+    $row_check = mysqli_fetch_assoc($res_check);
+    $old_score = $row_check['grade'];
+
+    if($old_score > $score) {
+        $score = $old_score;
+    } else if($old_score < $score) {
+        $score = $score;
+    }
+
+
     mysqli_query($conn,"UPDATE quiz_student SET quiz_time = $time_limit ,status = 'submitted' ,`grade` = '".$score."', items = '".($x-1)."' 
     WHERE quiz_id = '$quiz_id' and student_id = '$student_id'")or die(mysqli_error());
     
